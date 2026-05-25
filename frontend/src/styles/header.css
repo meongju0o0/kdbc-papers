@@ -1,0 +1,52 @@
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #dce2f0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 36px;
+  object-fit: contain;
+}
+
+.brand-text {
+  font-size: 1rem;
+  color: #4a5874;
+  font-weight: 700;
+}
+
+.main-nav {
+  display: flex;
+  gap: 28px;
+  font-weight: 700;
+}
+
+.main-nav a {
+  color: #22304d;
+}
+
+.main-nav a.active {
+  color: #214eaa;
+}
+
+.nav-user {
+  color: #4a5874;
+}

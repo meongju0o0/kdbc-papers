@@ -1,0 +1,63 @@
+.nav-text-button {
+  border: none;
+  background: transparent;
+  color: #22304d;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-text-button:hover {
+  color: #214eaa;
+}
+
+.danger-text-button {
+  border: none;
+  background: transparent;
+  color: #c0392b;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.danger-text-button:hover {
+  color: #962d22;
+}
+
+.danger-text-button:disabled {
+  color: #aab3c7;
+  cursor: not-allowed;
+}
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.primary-button {
+  background: #214eaa;
+  color: white;
+}
+
+.secondary-button {
+  background: white;
+  border: 1px solid #cad5ec;
+  color: #22304d;
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.table-link:hover,
+.preview-link-row:hover {
+  opacity: 0.88;
+}
+
+.inline-button {
+  margin-top: 24px;
+}

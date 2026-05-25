@@ -1,0 +1,180 @@
+.auth-page {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid #dbe3f5;
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(26, 39, 73, 0.05);
+  padding: 28px;
+}
+
+.auth-card h1 {
+  margin: 0;
+}
+
+.auth-card p {
+  margin: 8px 0 18px;
+  color: #60708f;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+  color: #415072;
+}
+
+.auth-form input {
+  border: 1px solid #ccd6ec;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #22304d;
+}
+
+.auth-error {
+  margin: 0;
+  color: #b43d3d;
+  font-size: 0.95rem;
+}
+
+.paper-create-page {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.paper-create-card {
+  width: 100%;
+  max-width: 720px;
+  background: #fff;
+  border: 1px solid #dbe3f5;
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(26, 39, 73, 0.05);
+  padding: 28px;
+}
+
+.paper-create-card h1 {
+  margin: 0;
+}
+
+.paper-create-card p {
+  margin: 8px 0 18px;
+  color: #60708f;
+}
+
+.paper-create-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.paper-create-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+  color: #415072;
+}
+
+.paper-create-form input,
+.paper-create-form textarea {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 400;
+  border: 1px solid #ccd6ec;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #22304d;
+}
+
+.paper-create-form textarea {
+  resize: none;
+  overflow-y: auto;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.pdf-dropzone {
+  border: 1px dashed #9db2df;
+  border-radius: 12px;
+  background: #f8faff;
+  padding: 18px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.pdf-dropzone:hover,
+.pdf-dropzone.drag-over {
+  border-color: #214eaa;
+  background: #edf3ff;
+}
+
+.pdf-dropzone-title {
+  margin: 0;
+  font-size: 0.98rem;
+  color: #23365a;
+}
+
+.pdf-dropzone-subtitle {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: #60708f;
+}
+
+.pdf-selected-name {
+  margin: 10px 0 0;
+  color: #214eaa;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.paper-create-form .full-width-field,
+.paper-create-form .auth-error,
+.paper-create-form button {
+  grid-column: 1 / -1;
+}
+
+.paper-form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.paper-form-actions .primary-button,
+.paper-form-actions .secondary-button {
+  grid-column: auto;
+}
+
+.issue-manage-layout {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.issue-manage-card h2 {
+  margin: 0 0 14px;
+}
+
+.issue-manage-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}

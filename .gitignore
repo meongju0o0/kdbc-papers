@@ -1,0 +1,44 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+
+# Node
+**/node_modules/
+**/dist/
+**/.vite/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment secrets
+**/.env
+**/.env.local
+**/.env.*.local
+
+# Uploads and local data
+backend/uploads/
+papers/*/*.pdf
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Database
+database/migrations/
+backend/data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Test/local payloads
+test.json

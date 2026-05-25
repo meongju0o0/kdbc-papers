@@ -1,0 +1,22 @@
+{
+  "name": "kcc-portal-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "create-user": "node scripts/create-user.js",
+    "delete-user": "node scripts/delete-user.js",
+    "reset-password": "node scripts/reset-password.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.1"
+  }
+}

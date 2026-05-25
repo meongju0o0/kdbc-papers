@@ -1,0 +1,40 @@
+@media (max-width: 900px) {
+  .header-inner,
+  .main-nav,
+  .preview-link-row,
+  .hero-actions {
+    flex-wrap: wrap;
+  }
+
+  .hero-section,
+  .board-grid,
+  .detail-grid,
+  .paper-create-form,
+  .issue-manage-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .issue-search-form {
+    grid-template-columns: 1fr;
+  }
+
+  .home-layout-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .issue-list-sidebar {
+    max-height: none;
+  }
+
+  .issue-search-header {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-section {
+    padding: 28px;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+}

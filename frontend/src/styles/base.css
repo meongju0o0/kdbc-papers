@@ -1,0 +1,70 @@
+:root {
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  color: #18253d;
+  background: #f4f6fb;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f4f6fb;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+  padding: 28px 24px 48px;
+}
+
+.site-footer {
+  margin-top: 12px;
+  border-top: 1px solid #dce2f0;
+  background: #ffffff;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 24px 12px;
+  color: #5f6f8d;
+  font-size: 0.9rem;
+}
+
+.footer-inner p {
+  margin: 2px 0;
+}
+
+.status-text {
+  padding: 16px 4px;
+}
+
+.status-text.error {
+  color: #b43d3d;
+}
