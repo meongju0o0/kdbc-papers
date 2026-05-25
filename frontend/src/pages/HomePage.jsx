@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { api } from '../api/client';
 import kdbcLogo from '../assets/KIISE_DB_logo_2.png';
 import Pagination from '../components/Pagination';
@@ -9,31 +9,42 @@ const ITEMS_PER_PAGE = 10;
 export default function HomePage() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Applied filter state derived from URL params — persistent across navigation
+  const appliedVolume = searchParams.get('vol') || '';
+  const appliedNo = searchParams.get('no') || '';
+  const appliedSearchQuery = searchParams.get('q') || '';
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+
   const [issues, setIssues] = useState([]);
   const [papers, setPapers] = useState([]);
-  const [selectedVolume, setSelectedVolume] = useState('');
-  const [selectedNo, setSelectedNo] = useState('');
-  const [expandedVolume, setExpandedVolume] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [appliedVolume, setAppliedVolume] = useState('');
-  const [appliedNo, setAppliedNo] = useState('');
-  const [appliedSearchQuery, setAppliedSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  // UI state initialized from URL params so sidebar reflects restored state
+  const [selectedVolume, setSelectedVolume] = useState(() => searchParams.get('vol') || '');
+  const [selectedNo, setSelectedNo] = useState(() => searchParams.get('no') || '');
+  const [expandedVolume, setExpandedVolume] = useState(() => searchParams.get('vol') || '');
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') || '');
   const [totalPages, setTotalPages] = useState(1);
   const [loadingIssues, setLoadingIssues] = useState(true);
   const [loadingPapers, setLoadingPapers] = useState(false);
   const [error, setError] = useState('');
   const [papersError, setPapersError] = useState('');
 
+  function buildParams(vol, no, q, page) {
+    const params = {};
+    if (vol) params.vol = vol;
+    if (no) params.no = no;
+    if (q) params.q = q;
+    if (page && page > 1) params.page = String(page);
+    return params;
+  }
+
   function resetHomeState() {
     setSelectedVolume('');
     setSelectedNo('');
     setExpandedVolume('');
     setSearchQuery('');
-    setAppliedVolume('');
-    setAppliedNo('');
-    setAppliedSearchQuery('');
-    setCurrentPage(1);
+    setSearchParams({}, { replace: true });
   }
 
   useEffect(() => {
@@ -63,15 +74,14 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const shouldResetByQuery = searchParams.has('homeReset');
+    const locationSearch = new URLSearchParams(location.search);
+    const shouldResetByQuery = locationSearch.has('homeReset');
     const shouldResetByState = Boolean(location.state?.homeResetAt);
     const shouldReset = shouldResetByQuery || shouldResetByState;
     if (!shouldReset) return;
 
     resetHomeState();
 
-    // Keep the URL clean if legacy query-based reset links are visited.
     if (shouldResetByQuery) {
       navigate('/', { replace: true, state: location.state });
     }
@@ -84,7 +94,6 @@ export default function HomePage() {
         setLoadingPapers(true);
         const hasKeyword = appliedSearchQuery.trim().length > 0;
         const response = await api.getPapers({
-          // When searching by keyword, query across all issues.
           volume: hasKeyword ? undefined : (appliedVolume || undefined),
           no: hasKeyword ? undefined : (appliedNo || undefined),
           page: currentPage,
@@ -94,9 +103,6 @@ export default function HomePage() {
 
         setPapers(response.items || []);
         setTotalPages(response.pagination?.totalPages || 1);
-        if (response.pagination?.page && response.pagination.page !== currentPage) {
-          setCurrentPage(response.pagination.page);
-        }
       } catch {
         setPapersError('논문 목록을 불러오지 못했습니다.');
       } finally {
@@ -151,12 +157,6 @@ export default function HomePage() {
     return `${year}.${String(month).padStart(2, '0')}`;
   }, [selectedIssue]);
 
-  function handleVolumeChange(event) {
-    const volume = event.target.value;
-    setSelectedVolume(volume);
-    setSelectedNo('');
-  }
-
   function handleVolumeGroupClick(volume) {
     if (expandedVolume === volume) {
       setExpandedVolume('');
@@ -166,13 +166,12 @@ export default function HomePage() {
   }
 
   function handleIssueClick(issue) {
-    setSelectedVolume(String(issue.volume));
-    setSelectedNo(String(issue.issue_no));
+    const vol = String(issue.volume);
+    const no = String(issue.issue_no);
+    setSelectedVolume(vol);
+    setSelectedNo(no);
     setSearchQuery('');
-    setAppliedVolume(String(issue.volume));
-    setAppliedNo(String(issue.issue_no));
-    setAppliedSearchQuery('');
-    setCurrentPage(1);
+    setSearchParams(buildParams(vol, no, '', 1), { replace: true });
   }
 
   function formatAuthors(authorsText) {
@@ -192,15 +191,15 @@ export default function HomePage() {
 
   function handleSearchApply() {
     const normalized = searchQuery.trim();
-    setAppliedSearchQuery(normalized);
-
     if (!normalized) {
-      // Empty keyword search should show the full paper list.
-      setAppliedVolume('');
-      setAppliedNo('');
+      setSearchParams({}, { replace: true });
+    } else {
+      setSearchParams({ q: normalized }, { replace: true });
     }
+  }
 
-    setCurrentPage(1);
+  function handlePageChange(page) {
+    setSearchParams(buildParams(appliedVolume, appliedNo, appliedSearchQuery, page), { replace: true });
   }
 
   return (
@@ -324,7 +323,7 @@ export default function HomePage() {
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
-                  onPageChange={setCurrentPage}
+                  onPageChange={handlePageChange}
                 />
               </>
             )}

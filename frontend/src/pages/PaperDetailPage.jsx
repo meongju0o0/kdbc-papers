@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { api } from '../api/client';
 
 export default function PaperDetailPage() {
   const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [paper, setPaper] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -28,7 +29,13 @@ export default function PaperDetailPage() {
   if (error) return <p className="status-text error">{error}</p>;
   if (!paper) return null;
 
-  const backPath = location.state?.from || '/';
+  function handleBack() {
+    if (location.state?.from) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  }
 
   return (
     <section className="detail-card">
@@ -63,7 +70,7 @@ export default function PaperDetailPage() {
         <p>{paper.abstract_text || '초록이 등록되지 않았습니다.'}</p>
       </div>
 
-      <Link to={backPath} className="secondary-button inline-button">목록으로</Link>
+      <button type="button" onClick={handleBack} className="secondary-button inline-button">목록으로</button>
     </section>
   );
 }
