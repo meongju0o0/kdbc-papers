@@ -23,7 +23,7 @@ yarn-error.log*
 
 # Uploads and local data
 backend/uploads/
-papers/
+papers/*/*.pdf
 
 # Python artifacts
 __pycache__/
@@ -34,7 +34,7 @@ __pycache__/
 venv/
 
 # Database
-database/migrations
+database/migrations/
 backend/data/
 *.sqlite
 *.sqlite-shm
